@@ -31,7 +31,9 @@ mongoose.connect("mongodb://127.0.0.1:27017/userDB", {useNewUrlParser: true});
 
 const userSchema = new mongoose.Schema ({
     email: String,
-    password: String
+    password: String,
+    googleId: String,
+    facebookId: String
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -63,7 +65,7 @@ passport.use(new GoogleStrategy({
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
-  }
+  } 
 ));
 
 passport.use(new FacebookStrategy({
